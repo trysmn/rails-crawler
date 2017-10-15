@@ -1,2 +1,20 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="top-banner" id="section-1">
+  <div class="banner-content text-center">
+    <%= image_tag("logo-white.gif", height: 145, width: 200) %>
+    <h1 class="title">Daylily</h1>
+    <h3 class="tag">Make your trip special</h3>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <%= simple_form_for :search, html: {class: 'form-inline'}, url: "/events" , method: :get do |f| %>
+          <%= f.input :origin_iata, collection: CityAirport.all.order(:city_name), value_method: :iata_code, label_method: :city_name, label: false, include_blank: "Flying from", input_html: {class: "input-lg"} %>
+          <%= f.input :departure, label: false, input_html: {class: 'input-lg',id: :datetimepicker1,  value: Date.tomorrow.strftime('%Y/%m/%d')} %>
+          <%= f.input :return, label: false, input_html: {class: 'input-lg',id: :datetimepicker2, value: Date.tomorrow.strftime('%Y/%m/%d')} %>
+          <%= f.submit "Search", class: "btn btn-lg event-search-button" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <a href="#section-2" class="glyphicon glyphicon-menu-down arrow-down js-anchor-link"></a>
+  </div>
+</div>
