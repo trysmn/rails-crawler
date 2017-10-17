@@ -1,0 +1,5 @@
+<% @pubs.each do |pub| %>
+  <% if policy(pub).edit? %>
+    <%= link_to "Update", edit_pub_path(pub) %>
+  <% end %>
+<% end %>
