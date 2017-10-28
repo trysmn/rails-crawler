@@ -6,10 +6,14 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <%= simple_form_for :search, html: {class: 'form-inline'}, url: "/events" , method: :get do |f| %>
-          <%= f.input :city_name, collection: City.all.order(:city_name), value_method: :city_name, label_method: :city_name, label: false, include_blank: "City", input_html: {class: "input-lg"} %>
-          <%= f.input :number_of_pubs, collection: 1..10, label: false, include_blank: "Number of Pubs" %>
-          <%= f.submit "Search", class: "btn btn-lg event-search-button" %>
+          <%= simple_form_for :index, html: {class: 'form-inline'}, url: "/pubs" , method: :get do |f| %>
+            <div class="col-md-12">
+                <%= f.input :city_name, collection: @cities.order(:city_name), value_method: :city_name, label_method: :city_name, label: false, include_blank: "City", input_html: {class: "input-lg"} %>
+                <%= f.input :number_of_pubs, collection: 1..10, label: false, include_blank: "Number of pubs", input_html: {class: "input-lg"} %>
+                <%= f.input :city_name, collection: 1..12, label: false, input_html: {class: "input-lg"} %>
+                <%= f.input :city_name, label: false, placeholder: "Start Address", input_html: {class: "input-lg"} %>
+                <%= f.submit "Search", class: "btn btn-lg event-search-button" %>
+            </div>
           <% end %>
         </div>
       </div>
