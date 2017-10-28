@@ -6,7 +6,8 @@ class PubsController < ApplicationController
   end
 
   def index
-    @pubs = policy_scope(Pub).order(created_at: :desc)
+
+    # @pubs = policy_scope(Pub).order(created_at: :desc)
   end
 
   def new
