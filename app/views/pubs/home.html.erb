@@ -10,14 +10,26 @@
             <div class="col-md-12">
                 <%= f.input :city_name, collection: @cities.order(:city_name), value_method: :city_name, label_method: :city_name, label: false, include_blank: "City", input_html: {class: "input-lg"} %>
                 <%= f.input :number_of_pubs, collection: 1..10, label: false, include_blank: "Number of pubs", input_html: {class: "input-lg"} %>
-                <%= f.input :city_name, collection: 1..12, label: false, input_html: {class: "input-lg"} %>
+                <%= f.input :city_name, collection: 1..12, label: false, include_blank: "Start Time", input_html: {class: "input-lg"} %>
                 <%= f.input :city_name, label: false, placeholder: "Start Address", input_html: {class: "input-lg"} %>
                 <%= f.submit "Search", class: "btn btn-lg event-search-button" %>
             </div>
           <% end %>
         </div>
       </div>
+      <div id="map-container" class="col-md-9">
+        <div id="map"></div>
+      </div>
+      <div class="col-md-3">
+        <h1>content</h1>
+      </div>
+          <script>
+          </script>
+          <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA67RM_N6ENqtnfTq4ff9QOIKS6XBi09lM&callback=initMap">
+          </script>
+    <div class="col-md-12">
+        <a href="#section-2" class="glyphicon glyphicon-menu-down arrow-down js-anchor-link"></a>
     </div>
-    <a href="#section-2" class="glyphicon glyphicon-menu-down arrow-down js-anchor-link"></a>
   </div>
 </div>
