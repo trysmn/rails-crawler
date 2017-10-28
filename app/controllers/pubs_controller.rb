@@ -3,6 +3,7 @@ class PubsController < ApplicationController
   after_action :verify_authorized, except: [:home]
   def home
     @cities = City.all
+    @minute_intervals = [0,15,30,45]
   end
 
   def index
