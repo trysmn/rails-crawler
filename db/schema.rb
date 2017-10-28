@@ -40,6 +40,9 @@ ActiveRecord::Schema.define(version: 20171028163709) do
     t.datetime "updated_at",   null: false
     t.boolean  "offer"
     t.string   "address"
+    t.integer  "user_id"
+    t.integer  "drink_id"
+    t.integer  "city_id"
   end
 
   create_table "search_details", force: :cascade do |t|
