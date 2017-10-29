@@ -23,11 +23,15 @@
       <div id="map-container" class="col-md-9">
         <div id="map"></div>
       </div>
-      <div class="col-md-3" style="border-width:5px;border-style: solid;border-color: white; margin-top:25px;border-radius: 16px 16px;height:400px; overflow:auto;" >
+      <div class="col-md-3" style="padding-left:0;border-width:5px;border-style: solid;border-color: white; margin-top:25px;border-radius: 16px 16px;height:400px; overflow:auto;" >
         <div class="pubs-list">
              <% @cities.each do |city| %>
-                <h5 style="background:white; opacity:0.5; border-radius: 10px; height: 100px; width= 100%"><%= city.city_name%> </h5>
-                <h5 style="background:white; opacity:0.5; border-radius: 10px; height: 100px; width= 100%"><%= city.city_name%> </h5>
+                <div class="pub-container" style="background:white; opacity:0.5; border-radius:10px; height: 100px; width:100%; margin:10px">
+                    <div class="pub-details" style="padding:10px; text-align: left; font-size: 16px;">
+                        <%= city.city_name %><br>
+                        <%= city.city_name %>
+                    </div>
+                </div>
              <% end%>
         </div>
       </div>
