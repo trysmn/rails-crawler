@@ -25,35 +25,39 @@
       </div>
       <div class="col-md-3" style="padding-left:0;border-width:5px;border-style: solid;border-color: white; margin-top:25px;border-radius: 16px 16px;height:400px; overflow:auto;" >
         <div class="pubs-list">
-             <% @cities.each do |city| %>
+             <% @pubs.each do |pub| %>
                 <div class="pub-container" style="background:white; opacity:0.5; border-radius:10px; height: 100px; width:100%; margin:10px">
-                    <div class="pub-details" style="padding:10px; text-align: left; font-size: 16px;">
-                        <%= city.city_name %><br>
-                        <%= city.city_name %>
+                    <div class="pub-details" style="padding:10px; text-align: left; font-size: 14px;">
+                        <%= pub.name %><br>
+                        <%= pub.address %>
                     </div>
                 </div>
              <% end%>
         </div>
       </div>
+        <%= content_tag :div, class: "pubs_information", data: {pubs: @pubs} do %>
+        <% end %>
         <script>
           function initMap() {
-            var uluru = {lat: -25.363, lng: 131.044};
+              var pubsObj = $('.pubs_information').data('pubs');
             var directionsService = new google.maps.DirectionsService;
             var directionsDisplay = new google.maps.DirectionsRenderer;
             var map = new google.maps.Map(document.getElementById('map'), {
               zoom: 4,
-              center: uluru,
+              center: pubsObj[1].address,
                 mapTypeControl: false,
             });
             directionsDisplay.setMap(map);
             directionsService.route({
-                origin: uluru,
-                destination: {lat: -26.363, lng: 132.044},
-                waypoints: [{ location: {lat: -26.363, lng: 131.044}, stopover: true}],
-                travelMode: 'WALKING'
+                origin: pubsObj[1].address,
+                destination: pubsObj[2].address,
+                waypoints: [{ location: pubsObj[4].address, stopover: true}],
+                travelMode: 'WALKING',
+
             }, function(response, status) {
                 if (status === 'OK') {
                     directionsDisplay.setDirections(response);
+                    console.log(response);
                 } else {
                     window.alert('Directions request failed due to ' + status);
                 }
@@ -62,7 +66,7 @@
         </script>
 
         <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA67RM_N6ENqtnfTq4ff9QOIKS6XBi09lM&callback=initMap">
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDEyA9ZpnnPaXHP_2mksVOPDrHoLvYEKg&callback=initMap">
         </script>
     <div class="col-md-12">
         <a href="#section-2" class="glyphicon glyphicon-menu-down arrow-down js-anchor-link"></a>
