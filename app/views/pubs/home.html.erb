@@ -27,22 +27,36 @@
         <div class="pubs-list">
              <% @cities.each do |city| %>
                 <h5 style="background:white; opacity:0.5; border-radius: 10px; height: 100px; width= 100%"><%= city.city_name%> </h5>
+                <h5 style="background:white; opacity:0.5; border-radius: 10px; height: 100px; width= 100%"><%= city.city_name%> </h5>
              <% end%>
         </div>
       </div>
         <script>
           function initMap() {
             var uluru = {lat: -25.363, lng: 131.044};
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer;
             var map = new google.maps.Map(document.getElementById('map'), {
               zoom: 4,
-              center: uluru
+              center: uluru,
+                mapTypeControl: false,
             });
-            var marker = new google.maps.Marker({
-              position: uluru,
-              map: map
+            directionsDisplay.setMap(map);
+            directionsService.route({
+                origin: uluru,
+                destination: {lat: -26.363, lng: 132.044},
+                waypoints: [{ location: {lat: -26.363, lng: 131.044}, stopover: true}],
+                travelMode: 'WALKING'
+            }, function(response, status) {
+                if (status === 'OK') {
+                    directionsDisplay.setDirections(response);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
             });
           }
         </script>
+
         <script async defer
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA67RM_N6ENqtnfTq4ff9QOIKS6XBi09lM&callback=initMap">
         </script>
