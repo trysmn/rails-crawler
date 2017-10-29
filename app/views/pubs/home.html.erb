@@ -27,7 +27,7 @@
         <div class="pubs-list">
              <% @pubs.each do |pub| %>
                 <div class="pub-container" style="background:white; opacity:0.5; border-radius:10px; height: 100px; width:100%; margin:10px">
-                    <div class="pub-details" style="padding:10px; text-align: left; font-size: 14px;">
+                    <div class="pub-details" style="padding:10px; text-align: left; font-size: 16px;">
                         <%= pub.name %><br>
                         <%= pub.address %>
                     </div>
@@ -53,7 +53,6 @@
                 destination: pubsObj[2].address,
                 waypoints: [{ location: pubsObj[4].address, stopover: true}],
                 travelMode: 'WALKING',
-
             }, function(response, status) {
                 if (status === 'OK') {
                     directionsDisplay.setDirections(response);
