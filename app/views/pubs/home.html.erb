@@ -21,10 +21,25 @@
       <div id="map-container" class="col-md-9">
         <div id="map"></div>
       </div>
-      <div class="col-md-3">
-        <h1>content</h1>
+      <div class="col-md-3" style="border-width:5px;border-style: solid;border-color: white; margin-top:25px;border-radius: 16px 16px;height:400px; overflow:auto;" >
+        <div class="pubs-list">
+             <% @cities.each do |city| %>
+                <h5 style="background:white; opacity:0.5; border-radius: 10px; height: 100px; width= 100%"><%= city.city_name%> </h5>
+             <% end%>
+        </div>
       </div>
           <script>
+            function initMap() {
+                var uluru = {lat: -25.363, lng: 131.044};
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 4,
+                    center: uluru
+                });
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map
+                });
+            }
           </script>
           <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA67RM_N6ENqtnfTq4ff9QOIKS6XBi09lM&callback=initMap">
