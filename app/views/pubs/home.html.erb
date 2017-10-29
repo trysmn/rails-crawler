@@ -13,6 +13,8 @@
                 <%= f.input :start_hour, collection: 1..12, label: false, include_blank: "Start Hour", input_html: {class: "input-lg"} %>
                 <%= f.input :start_minute, collection: @minute_intervals, label: false,  include_blank: "Start Minute",input_html: {class: "input-lg"} %>
                 <%= f.input :start_address, label: false, placeholder: "Start Address", input_html: {class: "input-lg"} %>
+                <%= f.input :circuit_display, label: t('Circuit'), as: :boolean %>
+                <%= f.input :circuit, as: :hidden, input_html: {value: false} %>
                 <%= f.submit "Search", class: "btn btn-lg event-search-button" %>
             </div>
           <% end %>
@@ -28,22 +30,22 @@
              <% end%>
         </div>
       </div>
-          <script>
-            function initMap() {
-                var uluru = {lat: -25.363, lng: 131.044};
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 4,
-                    center: uluru
-                });
-                var marker = new google.maps.Marker({
-                    position: uluru,
-                    map: map
-                });
-            }
-          </script>
-          <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA67RM_N6ENqtnfTq4ff9QOIKS6XBi09lM&callback=initMap">
-          </script>
+        <script>
+          function initMap() {
+            var uluru = {lat: -25.363, lng: 131.044};
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 4,
+              center: uluru
+            });
+            var marker = new google.maps.Marker({
+              position: uluru,
+              map: map
+            });
+          }
+        </script>
+        <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA67RM_N6ENqtnfTq4ff9QOIKS6XBi09lM&callback=initMap">
+        </script>
     <div class="col-md-12">
         <a href="#section-2" class="glyphicon glyphicon-menu-down arrow-down js-anchor-link"></a>
     </div>
