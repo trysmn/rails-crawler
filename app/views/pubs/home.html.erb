@@ -13,6 +13,8 @@
                 <%= f.input :start_hour, collection: 1..12, label: false, include_blank: "Start Hour", input_html: {class: "input-lg"} %>
                 <%= f.input :start_minute, collection: @minute_intervals, label: false,  include_blank: "Start Minute",input_html: {class: "input-lg"} %>
                 <%= f.input :start_address, label: false, placeholder: "Start Address", input_html: {class: "input-lg"} %>
+                <%= f.input :circuit_display, label: t('Circuit'), as: :boolean %>
+                <%= f.input :circuit, as: :hidden, input_html: {value: false} %>
                 <%= f.submit "Search", class: "btn btn-lg event-search-button" %>
             </div>
           <% end %>
