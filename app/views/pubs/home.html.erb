@@ -1,71 +1,75 @@
-<div class="top-banner" id="section-1">
-  <div class="banner-content text-center">
-    <%= image_tag("crawl-logo.png", height: 145, width: 200) %>
-    <h1 class="title">Crawler</h1>
-    <h3 class="tag">Your bar crawl, planned.</h3>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <%= simple_form_for :index, html: {class: 'form-inline'}, url: "/pubs" , method: :get do |f| %>
-            <div class="col-md-12">
-                <%= f.input :city_name, collection: @cities.order(:city_name), value_method: :city_name, label_method: :city_name, label: false, include_blank: "City", input_html: {class: "input-lg"} %>
-                <%= f.input :number_of_pubs, collection: 1..10, label: false, include_blank: "Number of pubs", input_html: {class: "input-lg"} %>
-                <%= f.input :start_hour, collection: 1..12, label: false, include_blank: "Start Hour", input_html: {class: "input-lg"} %>
-                <%= f.input :start_minute, collection: @minute_intervals, label: false,  include_blank: "Start Minute",input_html: {class: "input-lg"} %>
-                <%= f.input :start_address, label: false, placeholder: "Start Address", input_html: {class: "input-lg"} %>
-                <%= f.input :circuit_display, label: t('Circuit'), as: :boolean %>
-                <%= f.input :circuit, as: :hidden, input_html: {value: false} %>
-                <%= f.submit "Search", class: "btn btn-lg event-search-button" %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <div id="map-container" class="col-md-9">
-        <div id="map"></div>
-      </div>
-      <div class="col-md-3" style="padding-left:0;border-width:5px;border-style: solid;border-color: white; margin-top:25px;border-radius: 16px 16px;height:400px; overflow:auto;" >
-        <div class="pubs-list">
-             <% @cities.each do |city| %>
-                <div class="pub-container" style="background:white; opacity:0.5; border-radius:10px; height: 100px; width:100%; margin:10px">
-                    <div class="pub-details" style="padding:10px; text-align: left; font-size: 16px;">
-                        <%= city.city_name %><br>
-                        <%= city.city_name %>
-                    </div>
-                </div>
-             <% end%>
-        </div>
-      </div>
-        <script>
-          function initMap() {
-            var uluru = {lat: -25.363, lng: 131.044};
-            var directionsService = new google.maps.DirectionsService;
-            var directionsDisplay = new google.maps.DirectionsRenderer;
-            var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 4,
-              center: uluru,
-                mapTypeControl: false,
-            });
-            directionsDisplay.setMap(map);
-            directionsService.route({
-                origin: uluru,
-                destination: {lat: -26.363, lng: 132.044},
-                waypoints: [{ location: {lat: -26.363, lng: 131.044}, stopover: true}],
-                travelMode: 'WALKING'
-            }, function(response, status) {
-                if (status === 'OK') {
-                    directionsDisplay.setDirections(response);
-                } else {
-                    window.alert('Directions request failed due to ' + status);
-                }
-            });
-          }
-        </script>
+<div class="container" id="section-1">
+  <div class="logo">
+    <%= image_tag("logo1.png", height: 500, width: 500) %>
+  </div>
+  <h3 class="tag">Your bar crawl, planned.</h3>
+  <div class="search_bar temp_class">
+    <%= simple_form_for :index, html: {class: 'form-inline'}, url: "/pubs" , method: :get do |f| %>
+      <%= f.input :city_name, collection: @cities.order(:city_name), value_method: :city_name, label_method: :city_name, label: false, include_blank: "City", input_html: { id: "city_select", class: "search_fields" } %>
+      <%= f.input :number_of_pubs, collection: 1..10, label: false, include_blank: "Number of pubs", input_html: { id: "pubs_number", class: "search_fields" } %>
+      <%= f.input :start_hour, collection: 0..23, label: false, include_blank: "Start Hour", input_html: { id: "start_time", class: "search_fields"} %>
+      <%= f.input :start_minute, collection: @minute_intervals, label: false,  include_blank: "Start Minute",input_html: {id: "start_time", class: "search_fields"} %>
+      <%= f.input :start_address, label: false, placeholder: "Start Address", input_html: { id: "where_from",class: "search_fields"} %>
+      <%= f.input :circuit_display, label: t('Do you want to finish where you started?'), as: :boolean, input_html: {class: "search_fields"} %>
+      <%= f.input :circuit, as: :hidden, input_html: {value: false, id: "route_checkbox", class: "search_fields"} %>
 
-        <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA67RM_N6ENqtnfTq4ff9QOIKS6XBi09lM&callback=initMap">
-        </script>
-    <div class="col-md-12">
-        <a href="#section-2" class="glyphicon glyphicon-menu-down arrow-down js-anchor-link"></a>
+      <br/><br/>
+
+      <center>
+        <p class="toggle">Toggle advanced search</p>
+        <br/>
+          <img src="assets/images/arrow.png" width="100px" height="100px" id="arrow" class="rotated toggle"/>
+        <br/>
+      </center>
+
+      <%= f.submit "Show me the way to Drunkirk!", class: "btn btn-lg event-search-button" %>
+    <% end %>
+  </div>
+  <div id="map-container" class="col-md-9">
+    <div id="map"></div>
+  </div>
+  <div class="col-md-3" style="padding-left:0;border-width:5px;border-style: solid;border-color: white; margin-top:25px;border-radius: 16px 16px;height:400px; overflow:auto;" >
+    <div class="pubs-list">
+         <% @cities.each do |city| %>
+            <div class="pub-container" style="background:white; opacity:0.5; border-radius:10px; height: 100px; width:100%; margin:10px">
+                <div class="pub-details" style="padding:10px; text-align: left; font-size: 16px;">
+                    <%= city.city_name %><br>
+                    <%= city.city_name %>
+                </div>
+            </div>
+         <% end%>
     </div>
+  </div>
+    <script>
+      function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru,
+            mapTypeControl: false,
+        });
+        directionsDisplay.setMap(map);
+        directionsService.route({
+            origin: uluru,
+            destination: {lat: -26.363, lng: 132.044},
+            waypoints: [{ location: {lat: -26.363, lng: 131.044}, stopover: true}],
+            travelMode: 'WALKING'
+        }, function(response, status) {
+            if (status === 'OK') {
+                directionsDisplay.setDirections(response);
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+      }
+    </script>
+
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA67RM_N6ENqtnfTq4ff9QOIKS6XBi09lM&callback=initMap">
+    </script>
+  <div class="col-md-12">
+      <a href="#section-2" class="glyphicon glyphicon-menu-down arrow-down js-anchor-link"></a>
   </div>
 </div>
